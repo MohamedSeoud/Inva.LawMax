@@ -1,0 +1,25 @@
+{
+  "id": "82e07937-826f-4685-bdce-fe4f6b2fa67f",
+  "template": "app",
+  "versions": {
+    "AbpFramework": "8.2.1",
+    "AbpStudio": "0.7.5"
+  },
+  "modules": {
+    "Inva.LawMax": {
+      "path": "Inva.LawMax.abpmdl"
+    }
+  }, 
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+        "ignoredUrls": [
+          "^/metrics$"
+      ]
+    }
+  }
+}
