@@ -16,11 +16,16 @@ function configureRoutes(routes: RoutesService) {
         layout: eLayoutType.application,
       },
       {
-        path: '/books',
-        name: '::Menu:Books',
+        path: '/lawyers',
+        name: 'Lawyers',
         iconClass: 'fas fa-book',
         layout: eLayoutType.application,
-        requiredPolicy: 'LawMax.Books',
+      },
+      {
+        path: '/cases',
+        name: 'Cases',
+        iconClass: 'fas fa-book',
+        layout: eLayoutType.application,
       },
     ]);
   };

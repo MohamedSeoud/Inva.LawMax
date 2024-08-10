@@ -1,0 +1,37 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.custom-ng-select {
+  background-color: #f0f0f0;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.custom-ng-select .ng-select-container {
+  background-color: #f0f0f0;
+}
+
+.ng-select {
+  background-color: #f0f0f0 !important;
+  margin: 0.5rem 0 !important; /* Margin for spacing */
+  padding: 0.5rem !important; /* Padding for internal spacing */
+}
+
+/* Style for ng-select dropdown panel */
+.ng-dropdown-panel {
+  background-color: #f0f0f0 !important; /* Light gray background for the dropdown panel */
+  padding: 0.5rem !important; /* Padding inside the dropdown panel */
+}
+
+/* Style for ng-select options */
+.ng-option {
+  padding: 0.5rem !important; /* Padding between options */
+}
+
+/* Style for ng-select options when hovered */
+.ng-option:hover {
+  background-color: #e0e0e0 !important; /* Slightly darker gray for hover effect */
+}
+
+
+

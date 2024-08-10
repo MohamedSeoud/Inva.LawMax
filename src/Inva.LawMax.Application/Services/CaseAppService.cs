@@ -29,7 +29,7 @@ namespace Inva.LawMax.Application.Services
 
         public async Task<List<CaseDto>> GetListAsync()
         {
-            var cases = await _caseRepository.GetListAsync();
+            var cases = await _caseRepository.GetListAsync(true);
             return _mapper.Map<List<Case>, List<CaseDto>>(cases);
         }
 
@@ -42,7 +42,7 @@ namespace Inva.LawMax.Application.Services
 
         public async Task<CaseDto> UpdateAsync(Guid id, CreateUpdateCaseDto input)
         {
-            var caseEntity = await _caseRepository.GetAsync(id);
+            var caseEntity = await _caseRepository.GetAsync(id,true);
             _mapper.Map(input, caseEntity);
             var updatedCase = await _caseRepository.UpdateAsync(caseEntity);
             return _mapper.Map<Case, CaseDto>(updatedCase);

@@ -1,0 +1,96 @@
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ selectedCase.id ? 'Edit Case' : 'Create New Case' }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mb-3">
+        <label for="number" class="form-label">Case Number</label>
+        <input type="text" id="number" class="form-control" formControlName="number" />
+      </div>
+      <div class="mb-3">
+        <label for="year" class="form-label">Year</label>
+        <input type="number" id="year" class="form-control" formControlName="year" />
+      </div>
+      <div class="mb-3">
+        <label for="litigationDegree" class="form-label">Litigation Degree</label>
+        <input type="text" id="litigationDegree" class="form-control" formControlName="litigationDegree" />
+      </div>
+      <div class="mb-3">
+        <label for="finalVerdict" class="form-label">Final Verdict</label>
+        <input type="text" id="finalVerdict" class="form-control" formControlName="finalVerdict" />
+      </div>
+
+      <div class="mb-3">
+        <label for="lawyer" class="form-label">Lawyer</label>
+        <ng-select
+          [items]="lawyers$ | async"
+          bindLabel="name"
+          bindValue="id"
+          formControlName="lawyerId"
+          placeholder="Select a Lawyer">
+        </ng-select>
+      </div>
+
+
+
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        {{ selectedCase.id ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">
+      Cancel
+    </button>
+  </div>
+</ng-template>
+
+<div>
+  <button class="btn btn-primary mb-3" (click)="createCase()">
+    Create New Case
+  </button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Year</th>
+        <th>Litigation Degree</th>
+        <th>Final Verdict</th>
+        <th>Lawyer</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let case of cases$ | async">
+        <td>{{ case.number }}</td>
+        <td>{{ case.year }}</td>
+        <td>{{ case.litigationDegree }}</td>
+        <td>{{ case.finalVerdict }}</td>
+        <td>{{ case?.lawyer?.name }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary m-1" (click)="editCase(case.id)">Edit</button>
+          <button class="btn btn-sm btn-danger m-1" (click)="delete(case.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav>
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page === 1">
+        <a class="page-link" (click)="onPageChange(page - 1)">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="totalCount <= pageSize">
+        <a class="page-link" (click)="onPageChange(page + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

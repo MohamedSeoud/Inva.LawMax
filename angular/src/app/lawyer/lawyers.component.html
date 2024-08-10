@@ -1,0 +1,80 @@
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ selectedLawyer.id ? 'Edit Lawyer' : 'Create New Lawyer' }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" />
+      </div>
+      <div class="mb-3">
+        <label for="position" class="form-label">Position</label>
+        <input type="text" id="position" class="form-control" formControlName="position" />
+      </div>
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile</label>
+        <input type="text" id="mobile" class="form-control" formControlName="mobile" />
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" id="address" class="form-control" formControlName="address" />
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        {{ selectedLawyer.id ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">
+      Cancel
+    </button>
+  </div>
+</ng-template>
+
+<div>
+  <button class="btn btn-primary mb-3" (click)="createLawyer()">
+    Create New Lawyer
+  </button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Mobile</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lawyer of lawyers$ | async">
+        <td>{{ lawyer.name }}</td>
+        <td>{{ lawyer.position }}</td>
+        <td>{{ lawyer.mobile }}</td>
+        <td>{{ lawyer.address }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary m-1" (click)="editLawyer(lawyer.id)">Edit</button>
+          <button class="btn btn-sm btn-danger m-1" (click)="delete(lawyer.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav>
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page === 1">
+        <a class="page-link" (click)="onPageChange(page - 1)">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="(page * pageSize) >= totalCount">
+        <a class="page-link" (click)="onPageChange(page + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
