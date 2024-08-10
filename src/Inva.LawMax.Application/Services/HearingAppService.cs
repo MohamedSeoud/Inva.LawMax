@@ -24,13 +24,13 @@ namespace Inva.LawMax.Application
 
         public async Task<HearingDto> GetAsync(Guid id)
         {
-            var hearing = await _hearingRepository.GetAsync(id);
+            var hearing = await _hearingRepository.GetAsync(id,true);
             return _mapper.Map<Hearing, HearingDto>(hearing);
         }
 
-        public async Task<List<HearingDto>> GetListAsync(Guid caseId)
+        public async Task<List<HearingDto>> GetListAsync()
         {
-            var hearings = await _hearingRepository.GetByCaseIdAsync(caseId);
+            var hearings = await _hearingRepository.GetListAsync(true);
             // Convert IList to List using ToList() extension method
             return _mapper.Map<List<Hearing>, List<HearingDto>>(hearings.ToList());
         }

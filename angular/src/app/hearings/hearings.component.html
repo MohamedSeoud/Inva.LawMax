@@ -1,0 +1,81 @@
+<!-- src/app/hearings/hearings.component.html -->
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ selectedHearing.id ? 'Edit Hearing' : 'Create New Hearing' }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" id="date" class="form-control" formControlName="date" />
+      </div>
+      <div class="mb-3">
+        <label for="decision" class="form-label">Decision</label>
+        <textarea id="decision" class="form-control" formControlName="decision"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="case" class="form-label">Case</label>
+        <ng-select
+          [items]="cases$ | async"
+          bindLabel="number"
+          bindValue="id"
+          formControlName="caseId"
+          placeholder="Select a Case">
+        </ng-select>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        {{ selectedHearing.id ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">
+      Cancel
+    </button>
+  </div>
+</ng-template>
+
+<div>
+  <button class="btn btn-primary mb-3" (click)="createHearing()">
+    Create New Hearing
+  </button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Decision</th>
+        <th>Case</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hearing of hearings$ | async">
+        <td>{{ hearing.date }}</td>
+        <td>{{ hearing.decision }}</td>
+        <td>{{ hearing?.case?.number }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary m-1" (click)="editHearing(hearing.id)">Edit</button>
+          <button class="btn btn-sm btn-danger m-1" (click)="delete(hearing.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav>
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page === 1">
+        <a class="page-link" (click)="onPageChange(page - 1)">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="totalCount <= pageSize">
+        <a class="page-link" (click)="onPageChange(page + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

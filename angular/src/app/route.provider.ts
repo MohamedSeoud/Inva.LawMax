@@ -27,6 +27,12 @@ function configureRoutes(routes: RoutesService) {
         iconClass: 'fas fa-book',
         layout: eLayoutType.application,
       },
+      {
+        path: '/hearings',
+        name: 'Hearings',
+        iconClass: 'fas fa-book',
+        layout: eLayoutType.application,
+      },
     ]);
   };
 }

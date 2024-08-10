@@ -24,9 +24,9 @@ namespace Inva.LawMax.Controllers.Hearing
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<HearingDto>>> GetListAsync([FromQuery] Guid input)
+        public async Task<ActionResult<List<HearingDto>>> GetListAsync()
         {
-            return await _hearingAppService.GetListAsync(input);
+            return await _hearingAppService.GetListAsync();
         }
 
         [HttpGet("{id}")]

@@ -28,6 +28,7 @@ const routes: Routes = [
   },
   { path: 'lawyers', loadChildren: () => import('./lawyer/lawyers.module').then(m => m.LawyerModule) },
   { path: 'cases', loadChildren: () => import('./cases/case.module').then(m => m.CaseModule) },
+  { path: 'hearings', loadChildren: () => import('./hearings/hearing.module').then(m => m.HearingModule) },
 
 ];
 

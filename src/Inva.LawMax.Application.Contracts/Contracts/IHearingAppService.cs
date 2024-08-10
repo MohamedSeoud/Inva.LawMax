@@ -9,7 +9,7 @@ namespace Inva.LawMax.Application.Contracts
     public interface IHearingAppService
     {
         Task<HearingDto> GetAsync(Guid id);
-        Task<List<HearingDto>> GetListAsync(Guid caseId);
+        Task<List<HearingDto>> GetListAsync();
         Task<HearingDto> CreateAsync(CreateUpdateHearingDto input);
         Task<HearingDto> UpdateAsync(Guid id, CreateUpdateHearingDto input);
         Task DeleteAsync(Guid id);
