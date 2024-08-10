@@ -10,7 +10,7 @@ namespace Inva.LawMax.Domain.Entities
         public int Year { get; set; }
         public string LitigationDegree { get; set; }
         public string FinalVerdict { get; set; }
-        public virtual ICollection<Hearing> Hearings { get; set; }
+        //public virtual ICollection<Hearing> Hearings { get; set; }
         public Guid LaywerId { get; set; }
 
         public virtual Lawyer Lawyer { get; set; }

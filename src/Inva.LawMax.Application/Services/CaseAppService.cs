@@ -36,6 +36,7 @@ namespace Inva.LawMax.Application.Services
         public async Task<CaseDto> CreateAsync(CreateUpdateCaseDto input)
         {
             var caseEntity = _mapper.Map<CreateUpdateCaseDto, Case>(input);
+            caseEntity.LaywerId = input.LawyerId;
             var createdCase = await _caseRepository.InsertAsync(caseEntity);
             return _mapper.Map<Case, CaseDto>(createdCase);
         }
@@ -44,6 +45,7 @@ namespace Inva.LawMax.Application.Services
         {
             var caseEntity = await _caseRepository.GetAsync(id,true);
             _mapper.Map(input, caseEntity);
+            caseEntity.LaywerId=input.LawyerId;
             var updatedCase = await _caseRepository.UpdateAsync(caseEntity);
             return _mapper.Map<Case, CaseDto>(updatedCase);
         }

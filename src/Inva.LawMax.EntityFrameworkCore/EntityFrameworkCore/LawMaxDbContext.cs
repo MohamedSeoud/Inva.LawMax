@@ -115,7 +115,7 @@ public class LawMaxDbContext :
             b.Property(h => h.Date).IsRequired();
             b.Property(h => h.Decision).HasMaxLength(500);
             b.HasOne(h => h.Case)
-             .WithMany(c => c.Hearings)
+             .WithMany()
              .HasForeignKey(h => h.CaseId);
         });
         /* Configure your own tables/entities inside here */
